@@ -70,7 +70,7 @@ export default function LeadForm({ className }: { className?: string }) {
 
   return (
     <div className={`bg-white p-6 md:p-8 rounded-xl shadow-2xl border border-muted ${className}`}>
-      <h3 className="text-2xl font-headline text-primary mb-2">Start Your Graphic Design Journey</h3>
+      <h3 className="text-2xl font-headline text-primary mb-2">Book a Free Councelling Session</h3>
       <p className="text-sm text-muted-foreground mb-6">Our counsellor will contact you shortly. No spam, only career guidance.</p>
       
       <Form {...form}>
@@ -151,7 +151,7 @@ export default function LeadForm({ className }: { className?: string }) {
                 Processing...
               </>
             ) : (
-              "Submit"
+              "Apply Now"
             )}
           </Button>
           <p className="text-center text-[10px] text-muted-foreground uppercase tracking-wider">
