@@ -1,7 +1,7 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
- basePath: '/design-courses-delh',
+ basePath: '/design-courses-delhi',
   trailingSlash: true,
   /* config options here */
   typescript: {
