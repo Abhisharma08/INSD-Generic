@@ -121,7 +121,7 @@ export default function LeadForm({ className }: { className?: string }) {
             name="courseInterest"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Interested Graphic Design Program</FormLabel>
+                <FormLabel>Interested Design Program</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
