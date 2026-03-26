@@ -42,6 +42,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  basePath: '/design-courses-delh',
 };
 
 export default nextConfig;
