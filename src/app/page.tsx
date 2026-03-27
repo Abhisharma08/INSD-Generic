@@ -5,18 +5,18 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Palette, 
-  Smartphone, 
-  Type, 
-  Layout, 
-  Briefcase, 
-  GraduationCap, 
-  Star, 
-  Users, 
-  Monitor, 
-  Lightbulb, 
-  ShieldCheck, 
+import {
+  Palette,
+  Smartphone,
+  Type,
+  Layout,
+  Briefcase,
+  GraduationCap,
+  Star,
+  Users,
+  Monitor,
+  Lightbulb,
+  ShieldCheck,
   ArrowRight,
   Facebook,
   Instagram,
@@ -61,18 +61,18 @@ export default function LandingPage() {
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b shadow-sm overflow-x-hidden">
         <div className="container mx-auto px-4 h-20 flex items-center justify-between max-w-7xl">
           <Link href="/" className="flex items-center gap-2">
-            <Image 
-              src={LOGO_URL} 
-              alt="INSD Logo" 
-              width={200} 
-              height={50} 
+            <Image
+              src={LOGO_URL}
+              alt="INSD Logo"
+              width={200}
+              height={50}
               className="h-10 w-auto object-contain"
               priority
             />
           </Link>
           <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               className="hidden md:block text-primary font-semibold"
               onClick={() => {
                 scrollToLeadForm();
@@ -80,7 +80,7 @@ export default function LandingPage() {
             >
               Book Counselling
             </Button>
-            <Button 
+            <Button
               className="bg-secondary hover:bg-secondary/90 text-white font-bold px-6"
               onClick={() => {
                 scrollToLeadForm();
@@ -94,48 +94,68 @@ export default function LandingPage() {
 
       <main className="pt-20 pb-24 lg:pb-0 w-full">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-primary py-20 lg:py-32 w-full">
-          <div className="absolute inset-0 opacity-10">
-            <Image 
-              src={heroImg?.imageUrl || DEFAULT_PLACEHOLDER} 
-              alt="Design Workspace" 
-              fill 
-              className="object-cover"
-              priority
-              data-ai-hint="graphic design workspace"
-            />
-          </div>
-          <div className="container mx-auto px-4 relative z-10 max-w-7xl">
+        <section className="bg-primary py-20 lg:py-24 w-full">
+          <div className="container mx-auto px-4 max-w-7xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
-              <div className="text-white space-y-6 w-full">
-                <Badge className="bg-secondary text-white border-none px-4 py-1 text-sm mb-4 animate-pulse">
+              <div className="space-y-6 w-full">
+                <div className="inline-block bg-white/10 text-white/80 rounded-full px-4 py-1.5 text-sm font-medium mb-2">
                   Admissions Open 2026-27
-                </Badge>
-                <h1 className="text-4xl md:text-6xl font-headline leading-tight text-white">
-                  We Don’t Just Teach Design. We Build <span className="text-secondary">Careers</span>
-                </h1>
-                <p className="text-xl text-white/90 max-w-xl">
-                <span className="text-secondary">Join INSD</span> – India’s Skill School and build job-ready design skills for a billion-dollar industry.
-                <br /> <br /> 15 Years of Creative Excellence | 75+ Campuses | 23 States | 30,000 Students | 300+ Industry Partners
-                <br /> <br /> 100% Lifetime Placement Support | 2000+ Placements Last Year | Packages up to ₹18 LPA
-                <span className="block mt-8 text-2xl font-bold text-secondary">Start Your Career in Design Today</span>
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button 
-                    size="lg" 
-                    className="bg-secondary hover:bg-secondary/90 text-white font-bold text-lg px-8 h-14 w-full sm:w-auto"
-                    onClick={() => {
-                      scrollToLeadForm();
-                    }}
-                  >
-                    Apply Now
-                  </Button>
                 </div>
-                <p className="text-sm italic text-white/70">
+
+                <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-headline leading-[1.1] text-white">
+                  We Don't Just Teach Design. We Build Careers
+                </h1>
+
+                <p className="text-xl text-white mb-8 max-w-2xl leading-relaxed font-sans">
+                  Join INSD – India’s Skill School and build job-ready design skills for a billion-dollar industry.
+                </p>
+
+                {/* Outlined Badges */}
+                <div className="flex flex-wrap gap-x-3 gap-y-3 mb-4 mt-8">
+                  <div className="flex items-center gap-2 border border-white/30 rounded-full px-5 py-2">
+                    <Star className="w-4 h-4 text-secondary" />
+                    <span className="text-white font-medium text-sm">15 Years of Creative Excellence</span>
+                  </div>
+                  <div className="flex items-center gap-2 border border-white/30 rounded-full px-5 py-2">
+                    <Star className="w-4 h-4 text-secondary" />
+                    <span className="text-white font-medium text-sm">75+ Campuses</span>
+                  </div>
+                  <div className="flex items-center gap-2 border border-white/30 rounded-full px-5 py-2">
+                    <Star className="w-4 h-4 text-secondary" />
+                    <span className="text-white font-medium text-sm">23 States</span>
+                  </div>
+                  <div className="flex items-center gap-2 border border-white/30 rounded-full px-5 py-2">
+                    <Star className="w-4 h-4 text-secondary" />
+                    <span className="text-white font-medium text-sm">30,000 Students</span>
+                  </div>
+                  <div className="flex items-center gap-2 border border-white/30 rounded-full px-5 py-2">
+                    <Star className="w-4 h-4 text-secondary" />
+                    <span className="text-white font-medium text-sm">300+ Industry Partners</span>
+                  </div>
+                </div>
+
+                {/* Filled Badges */}
+                <div className="flex flex-wrap gap-x-3 gap-y-3 mb-8 pt-4">
+                  <div className="flex items-center gap-2 rounded-full px-5 py-2 bg-secondary text-white shadow-lg shadow-secondary/40">
+                    <ShieldCheck className="w-4 h-4 text-white" />
+                    <span className="font-semibold text-sm">100% Lifetime Placement Support</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-full px-5 py-2 bg-secondary text-white shadow-lg shadow-secondary/40">
+                    <ShieldCheck className="w-4 h-4 text-white" />
+                    <span className="font-semibold text-sm">2000+ Placements Last Year</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-full px-5 py-2 bg-secondary text-white shadow-lg shadow-secondary/40">
+                    <ShieldCheck className="w-4 h-4 text-white" />
+                    <span className="font-semibold text-sm">Packages upto ₹18 LPA</span>
+                  </div>
+                </div>
+
+                <p className="text-sm italic text-white/80 pt-4">
                   * Limited Seats Available. Next batch starts soon.
                 </p>
               </div>
-              <div className="hidden lg:block" id="top-form-desktop">
+
+              <div className="hidden lg:block relative z-10" id="top-form-desktop">
                 <LeadForm />
               </div>
             </div>
@@ -152,22 +172,22 @@ export default function LandingPage() {
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image 
-                  src={studentImg?.imageUrl || DEFAULT_PLACEHOLDER} 
-                  alt="Student at Work" 
-                  fill 
+                <Image
+                  src={studentImg?.imageUrl || DEFAULT_PLACEHOLDER}
+                  alt="Student at Work"
+                  fill
                   className="object-cover"
                   data-ai-hint="designer working"
                 />
               </div>
               <div className="space-y-6">
-                <SectionHeader 
-                  title="Skills. Careers. Placements. Come First." 
+                <SectionHeader
+                  title="Skills. Careers. Placements. Come First."
                   // subtitle=""
                   centered={false}
                 />
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                    At INSD, we focus on what truly matters — skills, careers, and placements.
+                  At INSD, we focus on what truly matters — skills, careers, and placements.
                 </p>
                 <ul className="space-y-4">
                   {[
@@ -308,15 +328,15 @@ export default function LandingPage() {
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="space-y-6">
-                <SectionHeader 
-                  title="Graphic, Interior & Fashion Designing" 
+                <SectionHeader
+                  title="Graphic, Interior & Fashion Designing"
                   subtitle="Design is Powering High-Growth Industries"
                   centered={false}
                 />
                 <div className="grid grid-cols-1">
                   {[
-                    "Graphic design is driving digital, branding, and content platforms", 
-                    "Interior design is shaping residential and commercial spaces", 
+                    "Graphic design is driving digital, branding, and content platforms",
+                    "Interior design is shaping residential and commercial spaces",
                     "Fashion design is growing across apparel, styling, and creative industries",
                   ].map((job, i) => (
                     <div key={i} className="flex items-center gap-3 p-4 bg-muted/50 rounded-lg">
@@ -324,11 +344,11 @@ export default function LandingPage() {
                       <span className="font-medium text-primary">{job}</span>
                     </div>
                   ))}
-                <p className="block mt-2 text-lg text-muted-foreground">
-                  Across all three fields, demand is increasing as businesses and individuals invest more in design
-                <br /><span className="block mt-3 text-black font-bold size-lg">Design = Career-Ready Skill</span>
-                <span className=" text-slate-600 font-medium">With the right skills, you can work, grow, and earn.</span>
-                </p>
+                  <p className="block mt-2 text-lg text-muted-foreground">
+                    Across all three fields, demand is increasing as businesses and individuals invest more in design
+                    <br /><span className="block mt-3 text-black font-bold size-lg">Design = Career-Ready Skill</span>
+                    <span className=" text-slate-600 font-medium">With the right skills, you can work, grow, and earn.</span>
+                  </p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -401,8 +421,8 @@ export default function LandingPage() {
               The right skills can help you start earning.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-secondary hover:bg-secondary/90 text-white font-bold h-14 px-10 text-lg w-full sm:w-auto"
                 onClick={() => {
                   scrollToLeadForm();
@@ -410,9 +430,9 @@ export default function LandingPage() {
               >
                 Apply Now
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
+              <Button
+                variant="outline"
+                size="lg"
                 className="bg-primary border-primary text-white hover:bg-primary/5 h-14 px-10 text-lg w-full sm:w-auto"
                 //className="bg-primary text-white hover:bg-primary/90 px-8 h-12"
                 onClick={() => {
@@ -421,9 +441,9 @@ export default function LandingPage() {
               >
                 Get Course Details
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
+              <Button
+                variant="outline"
+                size="lg"
                 className="bg-secondary hover:bg-secondary/90 text-white font-bold h-14 px-10 text-lg w-full sm:w-auto"
                 onClick={() => {
                   scrollToLeadForm();
@@ -464,7 +484,7 @@ export default function LandingPage() {
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-30 lg:hidden p-4 bg-white border-t shadow-[0_-4px_10px_rgba(0,0,0,0.1)] flex gap-2 w-screen">
         <div className="w-full flex gap-2 max-w-7xl mx-auto px-4">
-          <Button 
+          <Button
             className="flex-1 bg-secondary text-white font-bold h-12"
             onClick={() => {
               scrollToLeadForm();
