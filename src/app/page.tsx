@@ -33,6 +33,7 @@ const DEFAULT_PLACEHOLDER = "https://picsum.photos/seed/placeholder/800/600";
 export default function LandingPage() {
   const heroImg = PlaceHolderImages.find(img => img.id === "hero-workspace");
   const studentImg = PlaceHolderImages.find(img => img.id === "student-work");
+  const skillsCareersImg = PlaceHolderImages.find(img => img.id === "skills-careers-placements");
   const brandingImg = PlaceHolderImages.find(img => img.id === "branding-mockup");
   const uiImg = PlaceHolderImages.find(img => img.id === "ui-ux-design");
 
@@ -94,8 +95,13 @@ export default function LandingPage() {
 
       <main className="pt-20 pb-24 lg:pb-0 w-full">
         {/* Hero Section */}
-        <section className="bg-primary py-20 lg:py-24 w-full">
-          <div className="container mx-auto px-4 max-w-7xl">
+        <section className="relative overflow-hidden bg-primary py-20 lg:py-24 w-full">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${heroImg?.imageUrl || DEFAULT_PLACEHOLDER})` }}
+          />
+          <div className="absolute inset-0 bg-primary/75" />
+          <div className="container relative z-10 mx-auto px-4 max-w-7xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
               <div className="space-y-6 w-full">
                 <div className="inline-block bg-white/10 text-white/80 rounded-full px-4 py-1.5 text-sm font-medium mb-2">
@@ -173,7 +179,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src={studentImg?.imageUrl || DEFAULT_PLACEHOLDER}
+                  src={skillsCareersImg?.imageUrl || DEFAULT_PLACEHOLDER}
                   alt="Student at Work"
                   fill
                   className="object-cover"

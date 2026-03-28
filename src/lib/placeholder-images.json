@@ -3,25 +3,31 @@
     {
       "id": "hero-workspace",
       "description": "Premium graphic design showcase",
-      "imageUrl": "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1773828067/ChatGPT_Image_Mar_18_2026_03_25_18_PM_cqpoxo.png",
+      "imageUrl": "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1774679728/P1162754_1_xj7kkb.jpg",
       "imageHint": "creative design"
     },
     {
       "id": "student-work",
       "description": "Graphic design student working on professional project",
-      "imageUrl": "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1773828065/ChatGPT_Image_Mar_18_2026_03_24_37_PM_v7ecvr.png",
+      "imageUrl": "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1774678816/Copy_of_page_31_1_1_vfxoxl.jpg",
       "imageHint": "designer workspace"
+    },
+    {
+      "id": "skills-careers-placements",
+      "description": "Students developing career-ready skills",
+      "imageUrl": "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1774679097/P1510960_1_1_1_wrknkg.jpg",
+      "imageHint": "career ready students"
     },
     {
       "id": "branding-mockup",
       "description": "Professional design awards and recognition",
-      "imageUrl": "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1773828065/ChatGPT_Image_Mar_18_2026_03_24_30_PM_phk9xd.png",
+      "imageUrl": "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1774678825/P1509595_1_ag1d3h.jpg",
       "imageHint": "design excellence"
     },
     {
       "id": "ui-ux-design",
       "description": "Mobile app UI/UX design process",
-      "imageUrl": "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1773828062/ChatGPT_Image_Mar_18_2026_03_25_21_PM_mxizdm.png",
+      "imageUrl": "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1774678817/WhatsApp_Image_2025-04-11_at_12.03.33_1_3_p6ohsl.jpg",
       "imageHint": "app design"
     }
   ]
