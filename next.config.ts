@@ -3,6 +3,15 @@ import type {NextConfig} from 'next';
 const nextConfig: NextConfig = {
  basePath: '/design-courses-delhi',
   trailingSlash: true,
+  serverExternalPackages: [],
+  serverActions: {
+    allowedOrigins: [
+      'insd-landing-page.vercel.app', 
+      'insd-generic.vercel.app', 
+      'localhost:3000', 
+      'localhost:3001'
+    ],
+  },
 
   typescript: {
     ignoreBuildErrors: true,
