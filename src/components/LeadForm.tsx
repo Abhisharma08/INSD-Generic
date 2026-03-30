@@ -17,6 +17,7 @@ const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   phone: z.string().min(10, { message: "Enter a valid 10-digit phone number." }).max(12),
   email: z.string().email({ message: "Please enter a valid email address." }),
+  course: z.string({ required_error: "Please select a course." }),
   courseInterest: z.string({ required_error: "Please select a course." }),
 })
 
@@ -31,6 +32,7 @@ export default function LeadForm({ className }: { className?: string }) {
       name: "",
       phone: "",
       email: "",
+      course: "",
       courseInterest: "",
     },
   })
@@ -118,10 +120,35 @@ export default function LeadForm({ className }: { className?: string }) {
           </div>
           <FormField
             control={form.control}
+            name="course"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Courses</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a course" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="fashion-design">Fashion Design</SelectItem>
+                    <SelectItem value="textile-design">Textile Design</SelectItem>
+                    <SelectItem value="graphic-design">Graphic Design</SelectItem>
+                    <SelectItem value="interior-design">Interior Design</SelectItem>
+                    <SelectItem value="jewellery-design">Jewellery Design</SelectItem>
+                    <SelectItem value="animation">Animation</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="courseInterest"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Interested Design Program</FormLabel>
+                <FormLabel>Program Type</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
