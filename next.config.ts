@@ -2,7 +2,7 @@ import type {NextConfig} from 'next';
 
  const nextConfig: NextConfig = {
   basePath: '/design-courses-delhi',
-  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
   typescript: {
     ignoreBuildErrors: true,
   },
