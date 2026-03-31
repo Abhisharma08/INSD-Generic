@@ -1,8 +1,8 @@
 import type {NextConfig} from 'next';
 
-const nextConfig: NextConfig = {
- basePath: '/design-courses-delhi',
-  trailingSlash: true,
+ const nextConfig: NextConfig = {
+  basePath: '/design-courses-delhi',
+  trailingSlash: false,
   serverExternalPackages: [],
   serverActions: {
     allowedOrigins: [

@@ -46,12 +46,12 @@ export default function LeadForm({ className }: { className?: string }) {
       
       if (result.success) {
         // Success: Redirect immediately
-        router.push("/thank-you/")
+        router.push("/thank-you")
       } else {
         // Partial error (e.g. CRM sync failed but data was otherwise valid)
         // We still redirect to thank you for a better user experience
         console.warn("CRM Sync Issue:", result.error);
-        router.push("/thank-you/")
+        router.push("/thank-you")
       }
     } catch (error) {
       // Network error or unexpected exception
@@ -64,7 +64,7 @@ export default function LeadForm({ className }: { className?: string }) {
       // Even on failure, if the user sees this multiple times, we might want to redirect anyway
       // to avoid them getting stuck.
       setTimeout(() => {
-        router.push("/thank-you/")
+        router.push("/thank-you")
       }, 2000)
     } finally {
       // If we've successfully called router.push, the page will change soon.
