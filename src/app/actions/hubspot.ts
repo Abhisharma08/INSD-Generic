@@ -11,6 +11,7 @@ export async function submitToHubSpot(data: {
   course: string;
   courseInterest: string;
   city: string;
+  lead_source?: string;
 }) {
   const accessToken = process.env.HUBSPOT_ACCESS_TOKEN;
 
@@ -37,6 +38,7 @@ export async function submitToHubSpot(data: {
           phone: data.phone,
           jobtitle: `Course: ${data.course} | Program: ${data.courseInterest}`,
           city: data.city,
+          lead_source: data.lead_source || 'Generic Landing Page',
         },
       }),
     });
