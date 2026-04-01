@@ -10,6 +10,7 @@ export async function submitToHubSpot(data: {
   phone: string;
   course: string;
   courseInterest: string;
+  city: string;
 }) {
   const accessToken = process.env.HUBSPOT_ACCESS_TOKEN;
 
@@ -35,6 +36,7 @@ export async function submitToHubSpot(data: {
           lastname: lastname || '',
           phone: data.phone,
           jobtitle: `Course: ${data.course} | Program: ${data.courseInterest}`,
+          city: data.city,
         },
       }),
     });
