@@ -22,7 +22,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <Script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18038800208"
+          src="https://www.googletagmanager.com/gtag/js?id=K6TRCZN5"
           strategy="afterInteractive"
         />
         <Script id="google-ads-tag" strategy="afterInteractive">
