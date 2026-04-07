@@ -242,9 +242,8 @@ export default function LandingPage() {
                 Apply Now
               </ScrollToLeadButton>
               <ScrollToLeadButton
-                variant="outline"
                 size="lg"
-                className="bg-primary border-primary text-white hover:bg-primary/5 h-14 px-10 text-lg w-full sm:w-auto"
+                className="bg-primary border border-primary text-white hover:bg-primary/90 h-14 px-10 text-lg w-full sm:w-auto"
               >
                 Get Course Details
               </ScrollToLeadButton>
