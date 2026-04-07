@@ -213,7 +213,7 @@ export default function LeadForm({ className }: { className?: string }) {
                   <FormItem>
                     <FormLabel>City</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your City" {...field} />
+                      <Input placeholder="Enter Your City Name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -228,7 +228,7 @@ export default function LeadForm({ className }: { className?: string }) {
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a course" />
+                          <SelectValue placeholder="Select Interested Course" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -253,7 +253,7 @@ export default function LeadForm({ className }: { className?: string }) {
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a program" />
+                          <SelectValue placeholder="Select Interested Program" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
