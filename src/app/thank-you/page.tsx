@@ -19,6 +19,7 @@ export default function ThankYouPage() {
               height={45} 
               className="h-10 w-auto object-contain"
               priority
+              quality={70}
             />
           </Link>
         </div>

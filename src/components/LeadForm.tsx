@@ -17,18 +17,30 @@ const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   phone: z.string().min(10, { message: "Enter a valid 10-digit phone number." }).max(12),
   email: z.string().email({ message: "Please enter a valid email address." }),
-  course: z.string({ required_error: "Please select a course." }),
-  courseInterest: z.string({ required_error: "Please select a course." }),
+  course: z.string().min(1, { message: "Please select a course." }),
+  courseInterest: z.string().min(1, { message: "Please select a program." }),
   city: z.string().min(2, { message: "City must be at least 2 characters." }),
   lead_source: z.string().optional(),
 })
 
+type LeadFormValues = z.infer<typeof formSchema>
+
+const contactStepSchema = formSchema.pick({
+  name: true,
+  email: true,
+  phone: true,
+})
+
+const contactStepFields = ["name", "email", "phone"] as const
+
 export default function LeadForm({ className }: { className?: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSavingStep, setIsSavingStep] = useState(false)
+  const [step, setStep] = useState(1)
   const { toast } = useToast()
   const router = useRouter()
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<LeadFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -41,167 +53,249 @@ export default function LeadForm({ className }: { className?: string }) {
     },
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function saveContactStep() {
+    const validation = contactStepSchema.safeParse(form.getValues())
+    form.clearErrors(contactStepFields)
+
+    if (!validation.success) {
+      validation.error.issues.forEach((issue) => {
+        const fieldName = issue.path[0] as keyof LeadFormValues
+        form.setError(fieldName, { message: issue.message })
+      })
+      return
+    }
+
+    setIsSavingStep(true)
+
+    try {
+      const values = form.getValues()
+      const result = await submitToHubSpot({
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        lead_source: values.lead_source,
+      })
+
+      if (!result.success) {
+        toast({
+          variant: "destructive",
+          title: "Could not save your details",
+          description: "Please try again before continuing.",
+        })
+        return
+      }
+
+      setStep(2)
+    } catch (error) {
+      console.error("Step Save Exception:", error)
+      toast({
+        variant: "destructive",
+        title: "Could not save your details",
+        description: "Please check your connection and try again.",
+      })
+    } finally {
+      setIsSavingStep(false)
+    }
+  }
+
+  async function onSubmit(values: LeadFormValues) {
     setIsSubmitting(true)
     
     try {
-      // Attempt to sync with CRM
       const result = await submitToHubSpot(values);
       
       if (result.success) {
-        // Success: Redirect immediately
         router.push("/thank-you")
       } else {
-        // Partial error (e.g. CRM sync failed but data was otherwise valid)
-        // We still redirect to thank you for a better user experience
         console.warn("CRM Sync Issue:", result.error);
-        router.push("/thank-you")
+        toast({
+          variant: "destructive",
+          title: "Could not submit your application",
+          description: "Please try again before leaving this page.",
+        })
       }
     } catch (error) {
-      // Network error or unexpected exception
       console.error("Submission Exception:", error);
       toast({
         variant: "destructive",
         title: "Submission Error",
         description: "We encountered a problem. Please try again or contact us directly.",
       })
-      // Even on failure, if the user sees this multiple times, we might want to redirect anyway
-      // to avoid them getting stuck.
-      setTimeout(() => {
-        router.push("/thank-you")
-      }, 2000)
     } finally {
-      // If we've successfully called router.push, the page will change soon.
-      // We only stop the loader if we stay on the page.
       setIsSubmitting(false)
     }
   }
 
   return (
-    <div className={`bg-white p-6 md:p-8 rounded-xl shadow-2xl border border-muted ${className}`}>
-      <h3 className="text-2xl font-headline text-primary mb-2">Book a Free Councelling Session</h3>
-      <p className="text-sm text-muted-foreground mb-6">Our counsellor will contact you shortly. No spam, only career guidance.</p>
+    <div className={`bg-white p-5 md:p-6 rounded-xl shadow-2xl border border-muted ${className}`}>
+      <div className="mb-5 space-y-3">
+        <div>
+          <h3 className="text-2xl font-headline text-primary mb-1">Book a Free Counselling Session</h3>
+          <p className="text-sm text-muted-foreground">Our counsellor will contact you shortly.</p>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
+          <div className={`rounded-full px-3 py-2 text-center ${step === 1 ? "bg-secondary text-white" : "bg-secondary/10 text-secondary"}`}>
+            1. Your Details
+          </div>
+          <div className={`rounded-full px-3 py-2 text-center ${step === 2 ? "bg-secondary text-white" : "bg-muted text-muted-foreground"}`}>
+            2. Course
+          </div>
+        </div>
+      </div>
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <input type="hidden" {...form.register("lead_source")} />
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Full Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your Name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email Address</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Your Email" type="email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Your Phone Number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormField
-            control={form.control}
-            name="city"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>City</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your City" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="course"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Courses</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a course" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="fashion-design">Fashion Design</SelectItem>
-                    <SelectItem value="textile-design">Textile Design</SelectItem>
-                    <SelectItem value="graphic-design">Graphic Design</SelectItem>
-                    <SelectItem value="interior-design">Interior Design</SelectItem>
-                    <SelectItem value="jewellery-design">Jewellery Design</SelectItem>
-                    <SelectItem value="animation">Animation</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="courseInterest"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Program Type</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a program" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="undergraduate">Under Graduate Program</SelectItem>
-                    <SelectItem value="postgraduate">Post Graduate Program</SelectItem>
-                    <SelectItem value="advanced-diploma">Advanced Diploma</SelectItem>
-                    <SelectItem value="diploma">Diploma</SelectItem>
-                    <SelectItem value="short-term">Short Term Course</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button 
-            type="submit" 
-            className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold h-14 text-lg min-h-14"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="animate-spin mr-2" />
-                Processing...
-              </>
-            ) : (
-              "Apply Now"
-            )}
-          </Button>
+
+          {step === 1 ? (
+            <>
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Full Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your Name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email Address</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your Email" type="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your Phone Number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="button"
+                className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold h-12 text-base"
+                disabled={isSavingStep}
+                onClick={saveContactStep}
+              >
+                {isSavingStep ? (
+                  <>
+                    <Loader2 className="animate-spin mr-2" />
+                    Saving...
+                  </>
+                ) : (
+                  "Continue"
+                )}
+              </Button>
+            </>
+          ) : (
+            <>
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>City</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your City" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="course"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Courses</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a course" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="fashion-design">Fashion Design</SelectItem>
+                        <SelectItem value="textile-design">Textile Design</SelectItem>
+                        <SelectItem value="graphic-design">Graphic Design</SelectItem>
+                        <SelectItem value="interior-design">Interior Design</SelectItem>
+                        <SelectItem value="jewellery-design">Jewellery Design</SelectItem>
+                        <SelectItem value="animation">Animation</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="courseInterest"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Program Type</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a program" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="undergraduate">Under Graduate Program</SelectItem>
+                        <SelectItem value="postgraduate">Post Graduate Program</SelectItem>
+                        <SelectItem value="advanced-diploma">Advanced Diploma</SelectItem>
+                        <SelectItem value="diploma">Diploma</SelectItem>
+                        <SelectItem value="short-term">Short Term Course</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="grid grid-cols-2 gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-12"
+                  disabled={isSubmitting}
+                  onClick={() => setStep(1)}
+                >
+                  Back
+                </Button>
+                <Button
+                  type="submit"
+                  className="bg-secondary hover:bg-secondary/90 text-white font-bold h-12 text-base"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="animate-spin mr-2" />
+                      Saving...
+                    </>
+                  ) : (
+                    "Apply Now"
+                  )}
+                </Button>
+              </div>
+            </>
+          )}
+
           <p className="text-center text-[10px] text-muted-foreground uppercase tracking-wider">
             Limited Seats for the Next Batch
           </p>

@@ -40,7 +40,6 @@
   body {
     @apply bg-background text-foreground font-body;
     overflow-x: hidden;
-    width: 100vw;
     max-width: 100%;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -67,5 +66,10 @@
 @layer components {
   .container {
     @apply max-w-7xl;
+  }
+
+  .btf-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
   }
 }
