@@ -7,6 +7,8 @@ type LeadData = {
   course?: string;
   courseInterest?: string;
   city?: string;
+  consulation_date?: string;
+  consulation_time?: string;
   lead_source?: string;
 };
 
@@ -50,6 +52,8 @@ function buildContactProperties(data: LeadData) {
     lastname: lastnameParts.join(' '),
     phone: data.phone,
     city: data.city,
+    consulation_date: data.consulation_date,
+    consulation_time: data.consulation_time,
     lead_source: data.lead_source || 'Generic Landing Page',
   };
 

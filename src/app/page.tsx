@@ -120,7 +120,7 @@ export default function LandingPage() {
                 </div>
 
                 <p className="text-sm italic text-white/80 pt-4">
-                  * Limited Seats Available. Next batch starts soon.
+                  BOOK A FREE CONSULTATION. LIMITED SPOTS AVAILABLE
                 </p>
               </div>
 

@@ -20,6 +20,8 @@ const formSchema = z.object({
   course: z.string().min(1, { message: "Please select a course." }),
   courseInterest: z.string().min(1, { message: "Please select a program." }),
   city: z.string().min(2, { message: "City must be at least 2 characters." }),
+  consulation_date: z.string().optional(),
+  consulation_time: z.string().optional(),
   lead_source: z.string().optional(),
 })
 
@@ -49,6 +51,8 @@ export default function LeadForm({ className }: { className?: string }) {
       course: "",
       courseInterest: "",
       city: "",
+      consulation_date: "",
+      consulation_time: "",
       lead_source: "Generic Landing Page",
     },
   })
@@ -130,7 +134,7 @@ export default function LeadForm({ className }: { className?: string }) {
     <div className={`bg-white p-5 md:p-6 rounded-xl shadow-2xl border border-muted ${className}`}>
       <div className="mb-5 space-y-3">
         <div>
-          <h3 className="text-2xl font-headline text-primary mb-1">Book a Free Counselling Session</h3>
+          <h3 className="text-2xl font-headline text-primary mb-1">BOOK A FREE CONSULTATION</h3>
           <p className="text-sm text-muted-foreground">Our counsellor will contact you shortly.</p>
         </div>
         <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
@@ -268,6 +272,32 @@ export default function LeadForm({ className }: { className?: string }) {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="consulation_date"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Consultation Date</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Select Date" type="date" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="consulation_time"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Consultation Time</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Select Time" type="time" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <div className="grid grid-cols-2 gap-3">
                 <Button
                   type="button"
@@ -297,7 +327,7 @@ export default function LeadForm({ className }: { className?: string }) {
           )}
 
           <p className="text-center text-[10px] text-muted-foreground uppercase tracking-wider">
-            Limited Seats for the Next Batch
+            BOOK A FREE CONSULTATION. LIMITED SPOTS AVAILABLE
           </p>
         </form>
       </Form>
