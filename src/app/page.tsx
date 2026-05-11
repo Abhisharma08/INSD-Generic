@@ -8,7 +8,7 @@ import ScrollToLeadButton from "@/components/ScrollToLeadButton"
 import SectionHeader from "@/components/SectionHeader"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
-const LOGO_URL = "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1773820493/Final-Logo_exeo3n.png";
+const LOGO_URL = "https://res.cloudinary.com/ddqqlfsjp/image/upload/v1778345781/INSD-Logo_Horizontal_fhm4u5.jpg";
 const DEFAULT_PLACEHOLDER = "https://picsum.photos/seed/placeholder/800/600";
 
 export default function LandingPage() {

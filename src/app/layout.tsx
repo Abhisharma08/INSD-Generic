@@ -23,6 +23,14 @@ const GTM_ID = 'GTM-K6TRCZN5';
 export const metadata: Metadata = {
   title: 'INSD | Premier Design Courses in Delhi',
   description: 'Turn your creativity into a career with INSD Delhi\'s Graphic Design programs. Industry-oriented curriculum with 100% placement support.',
+  icons: {
+    icon: [
+      {
+        url: 'https://res.cloudinary.com/ddqqlfsjp/image/upload/v1778345780/INSD-Logo_Half-logo_wqbynu.jpg',
+        type: 'image/jpeg',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
