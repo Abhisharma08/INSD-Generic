@@ -44,6 +44,13 @@ async function findHubSpotContactIdByEmail(email: string, accessToken: string) {
   return data.results?.[0]?.id as string | undefined;
 }
 
+function parseConsultationTime(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+  const [hours, minutes] = value.split(':').map(Number);
+  if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return undefined;
+  return String(hours * 3600 + minutes * 60);
+}
+
 function buildContactProperties(data: LeadData) {
   const [firstname, ...lastnameParts] = data.name.trim().split(/\s+/);
   const properties: Record<string, HubSpotPropertyValue> = {
@@ -53,7 +60,7 @@ function buildContactProperties(data: LeadData) {
     phone: data.phone,
     city: data.city,
     consulation_date: data.consulation_date,
-    consulation_time: data.consulation_time,
+    consulation_time: parseConsultationTime(data.consulation_time),
     lead_source: data.lead_source || 'Generic Landing Page',
   };
 
