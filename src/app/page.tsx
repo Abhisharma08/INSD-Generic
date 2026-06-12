@@ -124,8 +124,8 @@ export default function LandingPage() {
               </div>
 
               <div className="relative z-10 scroll-mt-24" id="top-form">
-                <div className="min-h-[720px] h-full w-full">
-                  <div className="npf_wgts h-full min-h-[720px] w-full" data-height="720px" data-w="df1baf18e63688d3ed4a8847f1cfbdc4"></div>
+                <div className="w-full">
+                  <div className="npf_wgts w-full" data-height="auto" data-w="df1baf18e63688d3ed4a8847f1cfbdc4"></div>
                 </div>
               </div>
             </div>
@@ -271,8 +271,8 @@ export default function LandingPage() {
                     Fill in your details and take the first step towards your career.
                   </p>
                 </div>
-                <div className="min-h-[720px] h-full w-full">
-                  <div className="npf_wgts h-full min-h-[720px] w-full" data-height="720px" data-w="df1baf18e63688d3ed4a8847f1cfbdc4"></div>
+                <div className="w-full">
+                  <div className="npf_wgts w-full" data-height="auto" data-w="df1baf18e63688d3ed4a8847f1cfbdc4"></div>
                 </div>
               </div>
             </div>
