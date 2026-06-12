@@ -272,7 +272,7 @@ export default function LandingPage() {
                   </p>
                 </div>
                 <div className="w-full min-h-[600px]">
-                  <div className="npf_wgts w-full min-h-[600px]" data-height="600px" data-w="df1baf18e63688d3ed4a8847f1cfbdc4"></div>
+                  <div className="npf_wgts w-full min-h-[620px]" data-height="620px" data-w="df1baf18e63688d3ed4a8847f1cfbdc4"></div>
                 </div>
               </div>
             </div>
