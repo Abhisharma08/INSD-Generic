@@ -66,6 +66,14 @@ export default function RootLayout({
         </noscript>
         {children}
         <Toaster />
+        <Script id="nopaperforms" strategy="afterInteractive">
+          {`var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://widgets.in4.nopaperforms.com/emwgts.js";
+            document.body.appendChild(s);
+          `}
+        </Script>
       </body>
     </html>
   );

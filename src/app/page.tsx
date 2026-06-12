@@ -3,7 +3,6 @@ import {
   Star,
   ShieldCheck,
 } from "lucide-react"
-import LeadForm from "@/components/LeadForm"
 import ScrollToLeadButton from "@/components/ScrollToLeadButton"
 import SectionHeader from "@/components/SectionHeader"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
@@ -125,7 +124,7 @@ export default function LandingPage() {
               </div>
 
               <div className="relative z-10 scroll-mt-24" id="top-form">
-                <LeadForm />
+                <div className="npf_wgts" data-height="400px" data-w="df1baf18e63688d3ed4a8847f1cfbdc4"></div>
               </div>
             </div>
           </div>
@@ -270,7 +269,7 @@ export default function LandingPage() {
                     Fill in your details and take the first step towards your career.
                   </p>
                 </div>
-                <LeadForm />
+                <div className="npf_wgts" data-height="400px" data-w="df1baf18e63688d3ed4a8847f1cfbdc4"></div>
               </div>
             </div>
           </div>
